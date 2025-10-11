@@ -1,44 +1,17 @@
-import "./style.css";
-import * as THREE from "three";
+import Stage from "./stage";
+import { gsap } from "gsap";
+import { debounce } from "./utils";
 
-const scene = new THREE.Scene();
+const carouselWrapper = document.querySelector(".content");
+const stage = new Stage(carouselWrapper);
 
-const canvas = document.querySelector("canvas.webgl");
+function reszie() {
+  stage.resize();
+}
 
-const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-};
+console.log("hi");
 
-window.addEventListener("resize", () => {
-  sizes.width = window.innerWidth;
-  sizes.height = window.innerHeight;
+gsap.ticker.add(stage.render.bind(stage));
 
-  camera.aspect = sizes.width / sizes.height;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.render(scene, camera);
-});
-
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
-camera.position.z = 5;
-scene.add(camera);
-
-const mesh = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1),
-  new THREE.MeshBasicMaterial({ color: "red" })
-);
-scene.add(mesh);
-
-const renderer = new THREE.WebGLRenderer({ canvas: canvas });
-renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.render(scene, camera);
-
-const animate = () => {
-  requestAnimationFrame(animate);
-};
-
-animate();
+window.addEventListener("load", reszie);
+window.addEventListener("resize", debounce(reszie));

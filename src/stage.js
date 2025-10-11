@@ -1,4 +1,13 @@
-import { OrthographicCamera, Scene, WebGLRenderer } from "three";
+import {
+  Mesh,
+  OrthographicCamera,
+  PlaneGeometry,
+  Scene,
+  SRGBColorSpace,
+  TextureLoader,
+  WebGLRenderer,
+  MeshStandardMaterial,
+} from "three";
 
 export default class Stage {
   constructor(container) {
@@ -24,9 +33,11 @@ export default class Stage {
       -width / 2,
       width / 2,
       height / 2,
-      -height / 2,
-      (this.camera.position.z = 10)
+      -height / 2
     );
+    this.camera.position.z = 10;
+
+    this.setUpPlanes();
   }
 
   resize() {
@@ -49,5 +60,21 @@ export default class Stage {
 
   render() {
     this.renderer.render(this.scene, this.camera);
+  }
+
+  setUpPlanes() {
+    this.DOMElements.forEach((image) => {
+      this.scene.add(this.generatePlane(image));
+    });
+  }
+
+  generatePlane(image) {
+    const loader = new TextureLoader();
+    const texture = loader.load(image.src);
+
+    texture.colorSpace = SRGBColorSpace;
+    const plane = new Mesh(new PlaneGeometry(1, 1), new MeshStandardMaterial());
+
+    return plane;
   }
 }
