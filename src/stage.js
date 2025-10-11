@@ -8,6 +8,8 @@ import {
   WebGLRenderer,
   MeshStandardMaterial,
 } from "three";
+import { getWorldPositionFromDOM } from "./utils";
+import PlanesMaterial from "./planes-material";
 
 export default class Stage {
   constructor(container) {
@@ -60,6 +62,12 @@ export default class Stage {
 
   render() {
     this.renderer.render(this.scene, this.camera);
+
+    this.DOMElements.forEach((image, i) => {
+      this.scene.children[i].position.copy(
+        getWorldPositionFromDOM(image, this.camera)
+      );
+    });
   }
 
   setUpPlanes() {
@@ -73,7 +81,7 @@ export default class Stage {
     const texture = loader.load(image.src);
 
     texture.colorSpace = SRGBColorSpace;
-    const plane = new Mesh(new PlaneGeometry(1, 1), new MeshStandardMaterial());
+    const plane = new Mesh(new PlaneGeometry(1, 1), new PlanesMaterial());
 
     return plane;
   }
