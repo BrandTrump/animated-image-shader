@@ -9,8 +9,6 @@ function reszie() {
   stage.resize();
 }
 
-console.log("hi");
-
 gsap.ticker.add(stage.render.bind(stage));
 
 window.addEventListener("load", reszie);

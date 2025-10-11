@@ -3,10 +3,13 @@ import baseFragment from "./shaders/baseFragment.glsl";
 import baseVertex from "./shaders/baseVertex.glsl";
 
 export default class PlanesMaterial extends ShaderMaterial {
-  constructor() {
+  constructor(texture) {
     super({
       vertexShader: baseVertex,
       fragmentShader: baseFragment,
+      uniforms: {
+        uTexture: { value: texture },
+      },
     });
   }
 }

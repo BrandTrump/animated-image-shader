@@ -10,6 +10,7 @@ import {
 } from "three";
 import { getWorldPositionFromDOM } from "./utils";
 import PlanesMaterial from "./planes-material";
+import Effect from "./effect";
 
 export default class Stage {
   constructor(container) {
@@ -40,6 +41,11 @@ export default class Stage {
     this.camera.position.z = 10;
 
     this.setUpPlanes();
+    this.effect = this.initEffect();
+  }
+
+  initEffect() {
+    return new Effect(this.scene, this.camera);
   }
 
   resize() {
@@ -81,7 +87,10 @@ export default class Stage {
     const texture = loader.load(image.src);
 
     texture.colorSpace = SRGBColorSpace;
-    const plane = new Mesh(new PlaneGeometry(1, 1), new PlanesMaterial());
+    const plane = new Mesh(
+      new PlaneGeometry(1, 1),
+      new PlanesMaterial(texture)
+    );
 
     return plane;
   }
