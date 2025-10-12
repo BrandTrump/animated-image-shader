@@ -9,6 +9,7 @@ export default class PlanesMaterial extends ShaderMaterial {
       fragmentShader: baseFragment,
       uniforms: {
         uTexture: { value: texture },
+        uGrayscaleProgress: { value: 1 },
       },
     });
   }
