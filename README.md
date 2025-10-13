@@ -1,4 +1,4 @@
 ## TODOS
 
-- [ ] Grayscale toggle
+- [x] Grayscale toggle
 - [ ] Animated circular reveal
