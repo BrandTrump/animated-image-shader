@@ -23,6 +23,14 @@ export default class Effect {
 
   onClick(e) {
     console.log("clicked");
+    // Convert click coordinates to normalized device coordinates (-1 to 1)
+    const normCoords = {
+      x: (e.x / window.innerWidth) * 2 - 1,
+      y: -(e.y / window.innerHeight) * 2 + 1,
+    };
+
+    // Set raycaster from the camera using the pointer's position
+    this.raycaster.setFromCamera(normCoords, this.camera);
 
     const [intersection] = this.raycaster.intersectObjects(this.scene.children);
 
