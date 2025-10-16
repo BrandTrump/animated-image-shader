@@ -39,6 +39,8 @@ export default class Effect {
 
       userData.isBw = !userData.isBw;
 
+      material.uniforms.uMouse.value = intersection.uv;
+
       gsap.to(material.uniforms.uGrayscaleProgress, {
         value: userData.isBw ? 1.0 : 0.0,
         duration: 1.5,
