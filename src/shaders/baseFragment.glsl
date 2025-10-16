@@ -8,9 +8,13 @@ vec3 toGrayscale(vec3 color) {
 }
 
 void main() {
+  float dist = distance(vUv, vec2(0.5));
+
+  float mask = smoothstep(uGrayscaleProgress - 0.1, uGrayscaleProgress, dist);
+
   vec3 originalColor = texture2D(uTexture, vUv).rgb;
   vec3 grayscaleColor = toGrayscale(originalColor);
   
-   vec3 finalColor = mix(originalColor, grayscaleColor, uGrayscaleProgress);
+   vec3 finalColor = mix(originalColor, grayscaleColor, mask);
    gl_FragColor = vec4(finalColor, 1.0);
 }
