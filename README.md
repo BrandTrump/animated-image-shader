@@ -2,7 +2,7 @@
 
 - [x] Grayscale toggle
 - [x] Animated circular reveal
-- [ ] Animated ripple effect
+- [x] Animated ripple effect
 
 ### Resources
 

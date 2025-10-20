@@ -11,6 +11,9 @@ export default class PlanesMaterial extends ShaderMaterial {
         uTexture: { value: texture },
         uGrayscaleProgress: { value: 0 },
         uMouse: { value: new Vector2(0.5, 0.5) },
+        uRippleProgress: { value: 0 },
+        uTime: { value: 0 },
+        uDirection: { value: 1 },
       },
     });
   }

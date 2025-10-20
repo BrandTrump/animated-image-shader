@@ -88,7 +88,7 @@ export default class Stage {
 
     texture.colorSpace = SRGBColorSpace;
     const plane = new Mesh(
-      new PlaneGeometry(1, 1),
+      new PlaneGeometry(1, 1, 50, 50),
       new PlanesMaterial(texture)
     );
 
